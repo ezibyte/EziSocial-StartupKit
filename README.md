@@ -6,6 +6,7 @@ This repository contains the starter kit of EziSocial Plugin.
 How to use this kit?
 --------------------
 
+Follow the following instructions to use this kit on respective platforms.
 
 iOS Platform
 ------------
@@ -47,7 +48,7 @@ This startup kit is using cocos2d-2.1-x-2.1.2 as the base version. You can updat
 
 
 Advance Features
-================
+----------------
 
 There are many features supported by EziSocial Plugin. All features are listed at http://www.ezibyte.com 
 
@@ -55,5 +56,5 @@ To know how to use this advance feature, read the tutorial: http://www.ezibyte.c
 
 You can tweet us or post message on Facebook or post message on our site if you face any problem to use this kit.
 
-Facebook Page: http://www.facebook.com/ezibyte
-Twitter Handle: @ezibyte
+-Facebook Page: http://www.facebook.com/ezibyte
+-Twitter Handle: @ezibyte
