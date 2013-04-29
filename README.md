@@ -17,6 +17,7 @@ iOS Platform
 4. Open info.plist file and change the following fields:-
 - FacebookAppID (Replace value with your id)
 - URL Types - (Replace the value with you id with prefix as fb).
+- **** Don't forget to change the bundle identifier name ;)
 
 Default values of both types already given.
 
