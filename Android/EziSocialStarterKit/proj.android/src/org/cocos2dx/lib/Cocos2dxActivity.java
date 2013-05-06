@@ -177,7 +177,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
-		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+		EziSocialManager.onActivityResult(requestCode, resultCode, data);
 	}
 	
 }
