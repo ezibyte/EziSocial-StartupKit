@@ -25,11 +25,17 @@ public:
     virtual void fbSessionCallback(int responseCode);
     virtual void fbUserDetailCallback(cocos2d::CCDictionary* data);
     virtual void fbMessageCallback(int responseCode);
-    virtual void fbChallengeCallback(int responseCode);
-    virtual void fbGiftCallback(int responseCode);
     virtual void fbPageLikeCallback(int responseCode);
     virtual void fbFriendsCallback(cocos2d::CCArray* friends);
     virtual void fbHighScoresCallback(cocos2d::CCArray* highScores);
+    
+    virtual void fbUserPhotoCallback(const char *userPhotoPath);
+    
+    virtual void fbSendRequestCallback(int responseCode, cocos2d::CCArray* friendsGotRequests);
+    virtual void fbRecieveRequestCallback(int responseCode,
+                                          const char* message,
+                                          const char* senderName,
+                                          cocos2d::CCDictionary* dataDictionary);
     
 };
 

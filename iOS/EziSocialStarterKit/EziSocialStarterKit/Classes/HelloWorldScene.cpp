@@ -172,47 +172,6 @@ void HelloWorld::fbMessageCallback(int responseCode)
     }
 }
 
-void HelloWorld::fbChallengeCallback(int responseCode)
-{
-    switch (responseCode)
-    {
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_CANCELLED:
-        {
-            break;
-        }
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_PUBLISHED:
-        {
-            break;
-        }
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLENGE_SENDING_ERROR:
-        {
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-void HelloWorld::fbGiftCallback(int responseCode)
-{
-    switch (responseCode)
-    {
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_CANCELLED:
-        {
-            break;
-        }
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_ERROR:
-        {
-            break;
-        }
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENT:
-        {
-            break;
-        }
-        default:
-            break;
-    }
-}
 
 void HelloWorld::fbPageLikeCallback(int responseCode)
 {
@@ -255,12 +214,140 @@ void HelloWorld::fbFriendsCallback(cocos2d::CCArray* friends)
     }
     else
     {
-        CCMessageBox("None of your friend playing this game.", "Friends Playing this game.");
-        
-        //CCUserDefault::sharedUserDefault()->setBoolForKey("", true);
-        
+        CCMessageBox("None of your friend playing this game.", "Friends Playing this game.");        
     }
 }
+
+void HelloWorld::fbSendRequestCallback(int responseCode, cocos2d::CCArray* friendsGotRequests)
+{
+    CCLOG("fbSendRequestCallback");
+    CCLOG("Response Code  = %d", responseCode);
+    
+    CCLOG("Printing Friends Array");
+    
+    for (int i=0; i<friendsGotRequests->count(); i++)
+    {
+        const char* friendID = ((CCString*)(friendsGotRequests->objectAtIndex(i)))->getCString();
+        CCLOG("Friend Name = %s", friendID);
+    }
+    
+    switch (responseCode)
+    {
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_ERROR:
+            CCMessageBox("There is error occured while sending gifts", "Gift Request Error");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_CANCELLED:
+            CCMessageBox("User didn't send gifts", "Gift Request Cancelled");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENT:
+            CCMessageBox("Gifts sent to friends successfully", "Gift Request Success");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLENGE_SENDING_ERROR:
+            CCMessageBox("There is error occured while challenging friends", "Challenge Request Error");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_CANCELLED:
+            CCMessageBox("User didn't challenge friends", "Challenge Request Cancelled");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_SENT:
+            CCMessageBox("Challenge sent to friends successfully", "Challenge Request Success");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_SENDING_ERROR:
+            CCMessageBox("There is error occured while sending Invite", "Invite Request Error");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_CANCELLED:
+            CCMessageBox("User didn't send Invite", "Invite Request Cancelled");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_SENT:
+            CCMessageBox("Invite sent to friends successfully", "Invite Request Success");
+            break;
+            
+            
+            
+        default:
+            break;
+    }
+}
+
+void HelloWorld::fbUserPhotoCallback(const char *userPhotoPath)
+{
+    
+    CCSprite* userPhoto = CCSprite::create(userPhotoPath);
+    
+    this->addChild(userPhoto);
+    
+    userPhoto->setPosition(ccp(CCDirector::sharedDirector()->getVisibleSize().width/2,
+                               CCDirector::sharedDirector()->getVisibleSize().height/2));
+    
+}
+
+
+void HelloWorld::fbRecieveRequestCallback(int responseCode,
+                                          const char* message,
+                                          const char* senderName,
+                                          cocos2d::CCDictionary* dataDictionary)
+{
+    CCLOG("fbRecieveRequestCallback");
+    CCLOG("Response Code  = %d", responseCode);
+    CCLOG("Message = %s", message);
+    CCLOG("senderName = %s", senderName);
+    
+    if (dataDictionary && dataDictionary->count() > 0)
+    {
+        CCArray* keys = dataDictionary->allKeys();
+        
+        CCLOG("Printing data dictionary");
+        
+        for (int i=0; i<keys->count(); i++)
+        {
+            const char* key = ((CCString*)(keys->objectAtIndex(i)))->getCString();
+            const char* value = ((CCString*)(dataDictionary->valueForKey(key)))->getCString();
+            CCLOG("Key = %s, Value = %s", key, value);
+        }
+        
+    }
+    
+    
+    switch (responseCode)
+    {
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_RECEIVE:
+            CCMessageBox(message, (CCString::createWithFormat("%s Invited You!", senderName, NULL))->getCString());
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLENGE_RECEIVE:
+            CCMessageBox(message, (CCString::createWithFormat("%s Challenged You!", senderName, NULL))->getCString());
+            break;
+            
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_RECEIVE:
+            CCMessageBox(message, (CCString::createWithFormat("%s has send gifts!", senderName, NULL))->getCString());
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_REQUEST_RECEIVE_PARSING_ERROR:
+            CCMessageBox("Request parameters parsing error", "Request Receive - Error");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_REQUEST_RECEIVE_SESSION_ERROR:
+            CCMessageBox("Facebook Session is not active. Ask user to login first via facebook to process incoming request.", "Request Receive - Error");
+            break;
+            
+            
+        default:
+            break;
+    }
+    
+    
+    
+}
+
+
 
 void HelloWorld::fbHighScoresCallback(cocos2d::CCArray* highScores)
 {

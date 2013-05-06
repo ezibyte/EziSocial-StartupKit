@@ -1,10 +1,11 @@
 //
 //  EziSocialDelegate.h
-//  EziSocial
+//  EziSocial StarterKit
 //
 //  Created by Paras Mendiratta on 15/04/13.
-//  Copyright @EziByte 2013
+//  EziByte (http://www.ezibyte.com)
 //
+
 /***
  
  This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
@@ -19,6 +20,8 @@
  
  */
 
+
+
 #ifndef FacebookGameDemo_EziSocialDelegate_h
 #define FacebookGameDemo_EziSocialDelegate_h
 
@@ -30,11 +33,17 @@ public:
     virtual void fbSessionCallback(int responseCode) = 0;
     virtual void fbUserDetailCallback(cocos2d::CCDictionary* data) = 0;
     virtual void fbMessageCallback(int responseCode) = 0;
-    virtual void fbChallengeCallback(int responseCode) = 0;
-    virtual void fbGiftCallback(int responseCode) = 0;
+    
+    virtual void fbSendRequestCallback(int responseCode, cocos2d::CCArray* friendsGotRequests) = 0;
+    virtual void fbRecieveRequestCallback(int responseCode,
+                                          const char* message,
+                                          const char* senderName, cocos2d::CCDictionary* dataDictionary) = 0;
+    
     virtual void fbPageLikeCallback(int responseCode) = 0;
     virtual void fbFriendsCallback(cocos2d::CCArray* friends) = 0;
     virtual void fbHighScoresCallback(cocos2d::CCArray* highScores) = 0;
+    
+    virtual void fbUserPhotoCallback(const char *userPhotoPath) = 0;
 };
 
 class EziEmailDelegate

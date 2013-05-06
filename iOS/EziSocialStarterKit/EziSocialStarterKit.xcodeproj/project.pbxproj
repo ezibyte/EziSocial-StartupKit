@@ -221,7 +221,6 @@
 		CB13989B172918DA0023CC40 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB13989A172918DA0023CC40 /* AppDelegate.cpp */; };
 		CB13989E172918DA0023CC40 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB13989D172918DA0023CC40 /* HelloWorldScene.cpp */; };
 		CB139AAB172919660023CC40 /* EziSocialObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB139AA9172919660023CC40 /* EziSocialObject.cpp */; };
-		CB139AAD172919800023CC40 /* libEziSocialPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AAC172919800023CC40 /* libEziSocialPlugin.a */; };
 		CB139AB617291A3B0023CC40 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB017291A3B0023CC40 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CB139AB717291A3B0023CC40 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB117291A3B0023CC40 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CB139AB817291A3B0023CC40 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB217291A3B0023CC40 /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -230,6 +229,7 @@
 		CB139ABB17291A3B0023CC40 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB517291A3B0023CC40 /* Twitter.framework */; };
 		CB139ABD17291A740023CC40 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139ABC17291A740023CC40 /* FacebookSDK.framework */; };
 		CB139ABF17291AA10023CC40 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139ABE17291AA10023CC40 /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		CBC705531738060B0039B676 /* libEziSocialPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC705521738060B0039B676 /* libEziSocialPlugin.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -704,7 +704,6 @@
 		CB139AA8172919660023CC40 /* EziSocialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EziSocialDelegate.h; sourceTree = "<group>"; };
 		CB139AA9172919660023CC40 /* EziSocialObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EziSocialObject.cpp; sourceTree = "<group>"; };
 		CB139AAA172919660023CC40 /* EziSocialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EziSocialObject.h; sourceTree = "<group>"; };
-		CB139AAC172919800023CC40 /* libEziSocialPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEziSocialPlugin.a; path = ios/libEziSocialPlugin.a; sourceTree = "<group>"; };
 		CB139AAE1729198D0023CC40 /* EziSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziSocialManager.h; path = ios/EziSocialManager.h; sourceTree = "<group>"; };
 		CB139AAF172919950023CC40 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ios/Reachability.h; sourceTree = "<group>"; };
 		CB139AB017291A3B0023CC40 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -715,6 +714,7 @@
 		CB139AB517291A3B0023CC40 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CB139ABC17291A740023CC40 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		CB139ABE17291AA10023CC40 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CBC705521738060B0039B676 /* libEziSocialPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEziSocialPlugin.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -739,8 +739,8 @@
 				CB1395C9172918D70023CC40 /* CoreGraphics.framework in Frameworks */,
 				CB13972D172918D90023CC40 /* libcurl.a in Frameworks */,
 				CB13972F172918D90023CC40 /* libwebp.a in Frameworks */,
-				CB139AAD172919800023CC40 /* libEziSocialPlugin.a in Frameworks */,
 				CB139ABD17291A740023CC40 /* FacebookSDK.framework in Frameworks */,
+				CBC705531738060B0039B676 /* libEziSocialPlugin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,6 +821,7 @@
 		CB1395E3172918D70023CC40 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				CBC705521738060B0039B676 /* libEziSocialPlugin.a */,
 				CB1395E4172918D70023CC40 /* AppController.h */,
 				CB1395E5172918D70023CC40 /* AppController.mm */,
 				CB1395E7172918D70023CC40 /* RootViewController.h */,
@@ -828,7 +829,6 @@
 				CB1395EA172918D70023CC40 /* main.m */,
 				CB139AAF172919950023CC40 /* Reachability.h */,
 				CB139AAE1729198D0023CC40 /* EziSocialManager.h */,
-				CB139AAC172919800023CC40 /* libEziSocialPlugin.a */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -2093,10 +2093,12 @@
 				GCC_PREFIX_HEADER = EziSocialStarterKit/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = EziSocialStarterKit/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/EziSocialStarterKit/libs/cocos2dx/platform/third_party/ios/libraries\"",
 					"\"$(SRCROOT)/EziSocialStarterKit/ios\"",
+					"\"$(SRCROOT)/EziSocialStarterKit\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2122,10 +2124,12 @@
 				GCC_PREFIX_HEADER = EziSocialStarterKit/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = EziSocialStarterKit/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/EziSocialStarterKit/libs/cocos2dx/platform/third_party/ios/libraries\"",
 					"\"$(SRCROOT)/EziSocialStarterKit/ios\"",
+					"\"$(SRCROOT)/EziSocialStarterKit\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2157,6 +2161,7 @@
 				CB1398A3172918DA0023CC40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,10 +1,12 @@
 //
 //  EziSocialObject.h
-//  EziSocial
+//  EziSocial StarterKit
 //
 //  Created by Paras Mendiratta on 11/04/13.
-//  Copyright @EziByte 2013
 //
+//  EziByte (http://www.ezibyte.com)
+//
+
 /***
  
  This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
@@ -19,11 +21,13 @@
  
  */
 
+
 #ifndef __FacebookGameDemo__EziSocialObject__
 #define __FacebookGameDemo__EziSocialObject__
 
 #include <iostream>
 #include "EziSocialDelegate.h"
+#include "EziSocialDefinition.h"
 
 class EziSocialObject
 {
@@ -32,10 +36,13 @@ class EziSocialObject
     EziTwitterDelegate *mTwitterDelegate;
     EziEmailDelegate *mEmailDelegate;
     
+    void downloadPhoto(const char *fbID, const char* filename, bool forceDownloadFromServer);
+    void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
+    
 public:
     
     ~EziSocialObject();
-
+    
     static EziSocialObject* sharedObject();
     
     void setFacebookDelegate(EziFacebookDelegate *facebookDelegate);
@@ -49,7 +56,7 @@ public:
     void performLoginUsingFacebook();
     void perfromLogoutFromFacebook();
     
-    void fetchFBUserDetails();
+    void fetchFBUserDetails(bool getEmailIDAlso);
     
     // Post Message On Wall
     void postMessageOnWall(const char* heading,
@@ -57,18 +64,33 @@ public:
                            const char* description,
                            const char* badgeIconURL,
                            const char* deepLinkURL);
-
+    
     void autoPostMessageOnWall(const char* heading,
-                           const char* caption,
-                           const char* description,
-                           const char* badgeIconURL,
-                           const char* deepLinkURL);
-
+                               const char* caption,
+                               const char* description,
+                               const char* badgeIconURL,
+                               const char* deepLinkURL);
+    
     void postScore(unsigned long long score);
     void hasUserLikedMyFBPage(const char* pageID);
+    
+    
     void getListOfFriendsUsingFBApp();
+    
+    void getFriends(EziSocialWrapperNS::FB_FRIEND_SEARCH::TYPE searchType);
+    void getFriends(EziSocialWrapperNS::FB_FRIEND_SEARCH::TYPE searchType, int startIndex, int limit);
+    
     void getHighScores();
     void openFacebookPage(const char* pageID, bool checkPageLikeOnApplicationBecomesActive);
+    
+    void getProfilePicForID(const char* userFacebookID, bool forceDownload);
+    void getProfilePicForID(const char* userFacebookID, EziSocialWrapperNS::FBUSER::PROFILE_PIC_TYPE picType, bool forceDownload);
+    void getProfilePicForID(const char* userFacebookID, int width, int height, bool forceDownload);
+    
+    void sendRequestToFriends(EziSocialWrapperNS::FB_REQUEST::TYPE requestType,
+                              const char* message,
+                              cocos2d::CCArray *selectedFriendIDs,
+                              cocos2d::CCDictionary *dataDictionary);
     
     // Twitter
     void tweet(const char* message, const char* imageURL);
@@ -79,6 +101,6 @@ public:
     // Network Status
     bool checkNetworkStatusForHost(const char* hostURL);
     
+    bool isFacebookSessionActive();
 };
-
 #endif /* defined(__FacebookGameDemo__EziSocialObject__) */
