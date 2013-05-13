@@ -229,7 +229,7 @@
 		CB139ABB17291A3B0023CC40 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB517291A3B0023CC40 /* Twitter.framework */; };
 		CB139ABD17291A740023CC40 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139ABC17291A740023CC40 /* FacebookSDK.framework */; };
 		CB139ABF17291AA10023CC40 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139ABE17291AA10023CC40 /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		CBC705531738060B0039B676 /* libEziSocialPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC705521738060B0039B676 /* libEziSocialPlugin.a */; };
+		CB49DC7B174079F7001FF9E9 /* libEziSocialPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB49DC7A174079F7001FF9E9 /* libEziSocialPlugin.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -714,7 +714,7 @@
 		CB139AB517291A3B0023CC40 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CB139ABC17291A740023CC40 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		CB139ABE17291AA10023CC40 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		CBC705521738060B0039B676 /* libEziSocialPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEziSocialPlugin.a; sourceTree = "<group>"; };
+		CB49DC7A174079F7001FF9E9 /* libEziSocialPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEziSocialPlugin.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -740,7 +740,7 @@
 				CB13972D172918D90023CC40 /* libcurl.a in Frameworks */,
 				CB13972F172918D90023CC40 /* libwebp.a in Frameworks */,
 				CB139ABD17291A740023CC40 /* FacebookSDK.framework in Frameworks */,
-				CBC705531738060B0039B676 /* libEziSocialPlugin.a in Frameworks */,
+				CB49DC7B174079F7001FF9E9 /* libEziSocialPlugin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,7 +821,7 @@
 		CB1395E3172918D70023CC40 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				CBC705521738060B0039B676 /* libEziSocialPlugin.a */,
+				CB49DC7A174079F7001FF9E9 /* libEziSocialPlugin.a */,
 				CB1395E4172918D70023CC40 /* AppController.h */,
 				CB1395E5172918D70023CC40 /* AppController.mm */,
 				CB1395E7172918D70023CC40 /* RootViewController.h */,
