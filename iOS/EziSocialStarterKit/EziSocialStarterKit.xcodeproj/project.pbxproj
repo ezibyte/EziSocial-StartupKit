@@ -220,7 +220,6 @@
 		CB139895172918DA0023CC40 /* cocos2dx-ext_public.defines.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB139894172918DA0023CC40 /* cocos2dx-ext_public.defines.txt */; };
 		CB13989B172918DA0023CC40 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB13989A172918DA0023CC40 /* AppDelegate.cpp */; };
 		CB13989E172918DA0023CC40 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB13989D172918DA0023CC40 /* HelloWorldScene.cpp */; };
-		CB139AAB172919660023CC40 /* EziSocialObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB139AA9172919660023CC40 /* EziSocialObject.cpp */; };
 		CB139AB617291A3B0023CC40 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB017291A3B0023CC40 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CB139AB717291A3B0023CC40 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB117291A3B0023CC40 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CB139AB817291A3B0023CC40 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB217291A3B0023CC40 /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -229,7 +228,12 @@
 		CB139ABB17291A3B0023CC40 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139AB517291A3B0023CC40 /* Twitter.framework */; };
 		CB139ABD17291A740023CC40 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139ABC17291A740023CC40 /* FacebookSDK.framework */; };
 		CB139ABF17291AA10023CC40 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB139ABE17291AA10023CC40 /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		CB49DC7B174079F7001FF9E9 /* libEziSocialPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB49DC7A174079F7001FF9E9 /* libEziSocialPlugin.a */; };
+		CB79AEC917580CB0006E1DF1 /* libEziSocialPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB79AEC817580CB0006E1DF1 /* libEziSocialPlugin.a */; };
+		CB79AED617580CD1006E1DF1 /* EziFacebookFriend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB79AECA17580CD0006E1DF1 /* EziFacebookFriend.cpp */; };
+		CB79AED717580CD1006E1DF1 /* EziFacebookUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB79AECC17580CD0006E1DF1 /* EziFacebookUser.cpp */; };
+		CB79AED817580CD1006E1DF1 /* EziFBIncomingRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB79AECE17580CD0006E1DF1 /* EziFBIncomingRequest.cpp */; };
+		CB79AED917580CD1006E1DF1 /* EziFBIncomingRequestManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB79AED017580CD0006E1DF1 /* EziFBIncomingRequestManager.cpp */; };
+		CB79AEDA17580CD1006E1DF1 /* EziSocialObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB79AED417580CD1006E1DF1 /* EziSocialObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -700,10 +704,6 @@
 		CB13989A172918DA0023CC40 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		CB13989C172918DA0023CC40 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		CB13989D172918DA0023CC40 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
-		CB139AA7172919660023CC40 /* EziSocialDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EziSocialDefinition.h; sourceTree = "<group>"; };
-		CB139AA8172919660023CC40 /* EziSocialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EziSocialDelegate.h; sourceTree = "<group>"; };
-		CB139AA9172919660023CC40 /* EziSocialObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EziSocialObject.cpp; sourceTree = "<group>"; };
-		CB139AAA172919660023CC40 /* EziSocialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EziSocialObject.h; sourceTree = "<group>"; };
 		CB139AAE1729198D0023CC40 /* EziSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziSocialManager.h; path = ios/EziSocialManager.h; sourceTree = "<group>"; };
 		CB139AAF172919950023CC40 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ios/Reachability.h; sourceTree = "<group>"; };
 		CB139AB017291A3B0023CC40 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -714,7 +714,19 @@
 		CB139AB517291A3B0023CC40 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CB139ABC17291A740023CC40 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		CB139ABE17291AA10023CC40 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		CB49DC7A174079F7001FF9E9 /* libEziSocialPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEziSocialPlugin.a; sourceTree = "<group>"; };
+		CB79AEC817580CB0006E1DF1 /* libEziSocialPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEziSocialPlugin.a; path = ios/libEziSocialPlugin.a; sourceTree = "<group>"; };
+		CB79AECA17580CD0006E1DF1 /* EziFacebookFriend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EziFacebookFriend.cpp; path = Classes/EziFacebookFriend.cpp; sourceTree = "<group>"; };
+		CB79AECB17580CD0006E1DF1 /* EziFacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziFacebookFriend.h; path = Classes/EziFacebookFriend.h; sourceTree = "<group>"; };
+		CB79AECC17580CD0006E1DF1 /* EziFacebookUser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EziFacebookUser.cpp; path = Classes/EziFacebookUser.cpp; sourceTree = "<group>"; };
+		CB79AECD17580CD0006E1DF1 /* EziFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziFacebookUser.h; path = Classes/EziFacebookUser.h; sourceTree = "<group>"; };
+		CB79AECE17580CD0006E1DF1 /* EziFBIncomingRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EziFBIncomingRequest.cpp; path = Classes/EziFBIncomingRequest.cpp; sourceTree = "<group>"; };
+		CB79AECF17580CD0006E1DF1 /* EziFBIncomingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziFBIncomingRequest.h; path = Classes/EziFBIncomingRequest.h; sourceTree = "<group>"; };
+		CB79AED017580CD0006E1DF1 /* EziFBIncomingRequestManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EziFBIncomingRequestManager.cpp; path = Classes/EziFBIncomingRequestManager.cpp; sourceTree = "<group>"; };
+		CB79AED117580CD0006E1DF1 /* EziFBIncomingRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziFBIncomingRequestManager.h; path = Classes/EziFBIncomingRequestManager.h; sourceTree = "<group>"; };
+		CB79AED217580CD1006E1DF1 /* EziSocialDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziSocialDefinition.h; path = Classes/EziSocialDefinition.h; sourceTree = "<group>"; };
+		CB79AED317580CD1006E1DF1 /* EziSocialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziSocialDelegate.h; path = Classes/EziSocialDelegate.h; sourceTree = "<group>"; };
+		CB79AED417580CD1006E1DF1 /* EziSocialObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EziSocialObject.cpp; path = Classes/EziSocialObject.cpp; sourceTree = "<group>"; };
+		CB79AED517580CD1006E1DF1 /* EziSocialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EziSocialObject.h; path = Classes/EziSocialObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -740,7 +752,7 @@
 				CB13972D172918D90023CC40 /* libcurl.a in Frameworks */,
 				CB13972F172918D90023CC40 /* libwebp.a in Frameworks */,
 				CB139ABD17291A740023CC40 /* FacebookSDK.framework in Frameworks */,
-				CB49DC7B174079F7001FF9E9 /* libEziSocialPlugin.a in Frameworks */,
+				CB79AEC917580CB0006E1DF1 /* libEziSocialPlugin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,7 +833,7 @@
 		CB1395E3172918D70023CC40 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				CB49DC7A174079F7001FF9E9 /* libEziSocialPlugin.a */,
+				CB79AEC817580CB0006E1DF1 /* libEziSocialPlugin.a */,
 				CB1395E4172918D70023CC40 /* AppController.h */,
 				CB1395E5172918D70023CC40 /* AppController.mm */,
 				CB1395E7172918D70023CC40 /* RootViewController.h */,
@@ -1735,14 +1747,22 @@
 		CB139898172918DA0023CC40 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CB139AA7172919660023CC40 /* EziSocialDefinition.h */,
-				CB139AA8172919660023CC40 /* EziSocialDelegate.h */,
-				CB139AA9172919660023CC40 /* EziSocialObject.cpp */,
-				CB139AAA172919660023CC40 /* EziSocialObject.h */,
 				CB139899172918DA0023CC40 /* AppDelegate.h */,
 				CB13989A172918DA0023CC40 /* AppDelegate.cpp */,
 				CB13989C172918DA0023CC40 /* HelloWorldScene.h */,
 				CB13989D172918DA0023CC40 /* HelloWorldScene.cpp */,
+				CB79AECA17580CD0006E1DF1 /* EziFacebookFriend.cpp */,
+				CB79AECB17580CD0006E1DF1 /* EziFacebookFriend.h */,
+				CB79AECC17580CD0006E1DF1 /* EziFacebookUser.cpp */,
+				CB79AECD17580CD0006E1DF1 /* EziFacebookUser.h */,
+				CB79AECE17580CD0006E1DF1 /* EziFBIncomingRequest.cpp */,
+				CB79AECF17580CD0006E1DF1 /* EziFBIncomingRequest.h */,
+				CB79AED017580CD0006E1DF1 /* EziFBIncomingRequestManager.cpp */,
+				CB79AED117580CD0006E1DF1 /* EziFBIncomingRequestManager.h */,
+				CB79AED217580CD1006E1DF1 /* EziSocialDefinition.h */,
+				CB79AED317580CD1006E1DF1 /* EziSocialDelegate.h */,
+				CB79AED417580CD1006E1DF1 /* EziSocialObject.cpp */,
+				CB79AED517580CD1006E1DF1 /* EziSocialObject.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2011,7 +2031,11 @@
 				CB13988F172918DA0023CC40 /* CCPhysicsSprite.cpp in Sources */,
 				CB13989B172918DA0023CC40 /* AppDelegate.cpp in Sources */,
 				CB13989E172918DA0023CC40 /* HelloWorldScene.cpp in Sources */,
-				CB139AAB172919660023CC40 /* EziSocialObject.cpp in Sources */,
+				CB79AED617580CD1006E1DF1 /* EziFacebookFriend.cpp in Sources */,
+				CB79AED717580CD1006E1DF1 /* EziFacebookUser.cpp in Sources */,
+				CB79AED817580CD1006E1DF1 /* EziFBIncomingRequest.cpp in Sources */,
+				CB79AED917580CD1006E1DF1 /* EziFBIncomingRequestManager.cpp in Sources */,
+				CB79AEDA17580CD1006E1DF1 /* EziSocialObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2085,7 +2109,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/FacebookSDK\"",
+					"\"$(SRCROOT)/FacebookSDK.framework\"",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2117,7 +2141,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/FacebookSDK\"",
+					"\"$(SRCROOT)/FacebookSDK.framework\"",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

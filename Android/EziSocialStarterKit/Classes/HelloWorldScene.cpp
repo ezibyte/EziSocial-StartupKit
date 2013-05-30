@@ -94,40 +94,37 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 }
 
 
-#warning You can remove this method if you don't want auto facbook login feature when scene is loaded.
+//#warning You can remove this method if you don't want auto facbook login feature when scene is loaded.
 void HelloWorld::onEnterTransitionDidFinish()
 {
     CCLog("Enter Transition Finished; Attempting Facebook Login.");
-    EziSocialObject::sharedObject()->performLoginUsingFacebook();
+    EziSocialObject::sharedObject()->performLoginUsingFacebook(false);
 }
 
 // ---------------------------------------------------------
-    #pragma mark - Facebook Delegate Methods
+#pragma mark - Facebook Delegate Methods
 // ---------------------------------------------------------
 
 
-void HelloWorld::fbSessionCallback(int responseCode)
+void HelloWorld::fbSessionCallback(int responseCode, const char* responseMessage)
 {
     switch (responseCode)
     {
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_LOGIN_NO_TOKEN:
-        {
-            CCMessageBox("Token Not available", "fbSessionCallback");
-            break;
-        }
         case EziSocialWrapperNS::RESPONSE_CODE::FB_LOGIN_SUCCESSFUL:
         {
-            CCMessageBox("Login Successful", "fbSessionCallback");
+            CCMessageBox(responseMessage, "Facebook Session - Response");
             break;
         }
         case EziSocialWrapperNS::RESPONSE_CODE::FB_LOGIN_FAILED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_LOGIN_PERMISSION_DENIED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_LOGIN_APP_NOT_ALLOWERD_TO_USE_FB:
         {
-            CCLOG("FB_LOGIN_FAILED or User cancelled Login.");
+            CCMessageBox(responseMessage, "Facebook Session - Response");
             break;
         }
         case EziSocialWrapperNS::RESPONSE_CODE::FB_LOGOUT_SUCCESSFUL:
         {
-            CCMessageBox("Logout Successful", "fbSessionCallback");
+            CCMessageBox(responseMessage, "Facebook Session - Response");
             break;
         }
         default:
@@ -136,60 +133,141 @@ void HelloWorld::fbSessionCallback(int responseCode)
     
 }
 
-void HelloWorld::fbUserDetailCallback(CCDictionary* data)
+void HelloWorld::fbUserDetailCallback(int responseCode, const char* responseMessage, EziFacebookUser* fbUser)
 {
-    if (data)
+    CCMessageBox(responseMessage, "User Details - Response");
+    
+    if (fbUser)
     {
-        CCMessageBox("Got user data", "fbUserDetailCallback");
-    }
-    else
-    {
-        CCMessageBox("Sorry, user details not available", "fbUserDetailCallback");
+        CCLOG("User Name = %s", fbUser->getUserName());
     }
 }
 
-void HelloWorld::fbMessageCallback(int responseCode)
+void HelloWorld::fbMessageCallback(int responseCode, const char* responseMessage)
+{
+    const char* title = "";
+    
+    switch (responseCode)
+    {
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_NORMAL_MESSAGE_PUBLISHED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_NORMAL_MESSAGE_CANCELLED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_NORMAL_MESSAGE_ERROR:
+        {
+            title = "Normal Post Response";
+            break;
+        }
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_AUTO_MESSAGE_PUBLISHED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_AUTO_MESSAGE_ERROR:
+        {
+            title = "Auto Post Response";
+            break;
+        }
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_SCORE_POSTED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_SCORE_POSTING_ERROR:
+        {
+            title = "Post Score API Response";
+            break;
+        }
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_SCORE_DELETED:
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_SCORE_DELETE_ERROR:
+        {
+            title = "Delete Score API Response";
+            break;
+        }
+        case EziSocialWrapperNS::RESPONSE_CODE::ERROR_PUBLISH_PERMISSION_ERROR:
+        {
+            title = "Publish Permission - Denied";
+            break;
+        }
+        case EziSocialWrapperNS::RESPONSE_CODE::ERROR_INTERNET_NOT_AVAILABLE:
+        {
+            title = "Internet not available";
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    CCMessageBox(responseMessage, title);
+}
+
+void HelloWorld::fbSendRequestCallback(int responseCode, const char* responseMessage, cocos2d::CCArray* friendsGotRequests)
 {
     switch (responseCode)
     {
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_MESSAGE_PUBLISHED:
-        {
-            CCMessageBox("Message posted on user wall successfully.", "Post Messgae on Wall");
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_ERROR:
+            CCMessageBox(responseMessage, "Gift Request Error");
             break;
-        }
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_MESSAGE_CANCELLLED:
-        {
-            CCMessageBox("User cancelled the message.", "Post Messgae on Wall");
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_CANCELLED:
+            CCMessageBox(responseMessage, "Gift Request Cancelled");
             break;
-        }
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_MESSAGE_PUBLISHING_ERROR:
-        {
-            CCMessageBox("Got error while publishing the message.", "Post Messgae on Wall");
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENT:
+            CCMessageBox(responseMessage, "Gift Request Success");
             break;
-        }
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLENGE_SENDING_ERROR:
+            CCMessageBox(responseMessage, "Challenge Request Error");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_CANCELLED:
+            CCMessageBox(responseMessage, "Challenge Request Cancelled");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_SENT:
+            CCMessageBox(responseMessage, "Challenge Request Success");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_SENDING_ERROR:
+            CCMessageBox(responseMessage, "Invite Request Error");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_CANCELLED:
+            CCMessageBox(responseMessage, "Invite Request Cancelled");
+            break;
+            
+        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_SENT:
+            CCMessageBox(responseMessage, "Invite Request Success");
+            break;
+            
+            
+            
         default:
             break;
     }
 }
 
+void HelloWorld::fbIncomingRequestCallback(int responseCode, const char* responseMessage, int totalIncomingRequests)
+{
+    if (totalIncomingRequests > 0)
+    {
+        CCMessageBox(CCString::createWithFormat("Total Pending Requests = %d", totalIncomingRequests, NULL)->getCString(),
+                     "Got New Incoming Request");
 
-void HelloWorld::fbPageLikeCallback(int responseCode)
+    }
+    else if (responseCode == EziSocialWrapperNS::RESPONSE_CODE::ERROR_INTERNET_NOT_AVAILABLE ||
+             responseCode == EziSocialWrapperNS::RESPONSE_CODE::FB_INCOMING_REQUEST_ERROR)
+    {
+        CCMessageBox(responseMessage, "Incoming Request Error");
+    }
+    else if (responseCode == EziSocialWrapperNS::RESPONSE_CODE::FB_NO_NEW_INCOMING_REQUEST)
+    {
+        CCLOG(responseMessage);
+    }
+}
+
+void HelloWorld::fbPageLikeCallback(int responseCode, const char* responseMessage)
 {
     switch (responseCode)
     {
         case EziSocialWrapperNS::RESPONSE_CODE::FB_PAGELIKE_ERROR:
-        {
-            CCMessageBox("Got error while checking page like.", "Error - Page Like");
-            break;
-        }
         case EziSocialWrapperNS::RESPONSE_CODE::FB_PAGELIKE_NEGATIVE:
-        {
-            CCMessageBox("Ah! He don't like my page", "PageLike - Negative");
-            break;
-        }
         case EziSocialWrapperNS::RESPONSE_CODE::FB_PAGELIKE_POSITIVE:
+        case EziSocialWrapperNS::RESPONSE_CODE::ERROR_INTERNET_NOT_AVAILABLE:
         {
-            CCMessageBox("Hurray! he like my page", "PageLike - Positive");
+            CCMessageBox(responseMessage, "PageLike Response");
             break;
         }
         default:
@@ -197,78 +275,34 @@ void HelloWorld::fbPageLikeCallback(int responseCode)
     }
 }
 
-void HelloWorld::fbFriendsCallback(cocos2d::CCArray* friends)
+void HelloWorld::fbPostPhotoCallback(int responseCode, const char* responseMessage)
 {
-    if (friends && friends->count() > 0)
-    {
-        CCLOG("Total Friends playing this game = %d", friends->count());
-        for (int i=0; i<friends->count(); i++)
-        {
-            CCDictionary *friendDetails = (CCDictionary *)friends->objectAtIndex(i);
-            CCString* friendID = (CCString*)friendDetails->objectForKey("id");
-            CCString* friendName = (CCString*)friendDetails->objectForKey("name");
-            CCLOG("%d. ID = %s, Name = %s", (i+1), friendID->getCString() ,friendName->getCString());
-        }
-        CCMessageBox((CCString::createWithFormat("Total friends playing this game = %d", friends->count()))->getCString(),
-                     "Friends Playing This Game");
-    }
-    else
-    {
-        CCMessageBox("None of your friend playing this game.", "Friends Playing this game.");        
-    }
+    CCMessageBox(responseMessage, CCString::createWithFormat("Response Code = %d", responseCode, NULL)->getCString());
 }
 
-void HelloWorld::fbSendRequestCallback(int responseCode, cocos2d::CCArray* friendsGotRequests)
+
+// ---------------------------------------------------------
+#pragma mark - EMail Delegate Methods
+// ---------------------------------------------------------
+void HelloWorld::mailCallback(int responseCode)
 {
-    CCLOG("fbSendRequestCallback");
-    CCLOG("Response Code  = %d", responseCode);
-    
-    CCLOG("Printing Friends Array");
-    
-    for (int i=0; i<friendsGotRequests->count(); i++)
-    {
-        const char* friendID = ((CCString*)(friendsGotRequests->objectAtIndex(i)))->getCString();
-        CCLOG("Friend Name = %s", friendID);
-    }
-    
     switch (responseCode)
     {
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_ERROR:
-            CCMessageBox("There is error occured while sending gifts", "Gift Request Error");
+        case EziSocialWrapperNS::RESPONSE_CODE::MAIL_SEND_SUCCESS:
+            CCMessageBox("Email sent successfully", "Email Status");
             break;
             
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENDING_CANCELLED:
-            CCMessageBox("User didn't send gifts", "Gift Request Cancelled");
+        case EziSocialWrapperNS::RESPONSE_CODE::MAIL_SEND_STORED:
+            CCMessageBox("User stored the email", "Email Status");
             break;
             
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_SENT:
-            CCMessageBox("Gifts sent to friends successfully", "Gift Request Success");
+        case EziSocialWrapperNS::RESPONSE_CODE::MAIL_SEND_CANCLLED:
+            CCMessageBox("User cancelled email.", "Email Status");
             break;
             
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLENGE_SENDING_ERROR:
-            CCMessageBox("There is error occured while challenging friends", "Challenge Request Error");
+        case EziSocialWrapperNS::RESPONSE_CODE::MAIL_SEND_ERROR:
+            CCMessageBox("Got error while sending email.", "Email Status");
             break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_CANCELLED:
-            CCMessageBox("User didn't challenge friends", "Challenge Request Cancelled");
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLEGE_SENT:
-            CCMessageBox("Challenge sent to friends successfully", "Challenge Request Success");
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_SENDING_ERROR:
-            CCMessageBox("There is error occured while sending Invite", "Invite Request Error");
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_CANCELLED:
-            CCMessageBox("User didn't send Invite", "Invite Request Cancelled");
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_SENT:
-            CCMessageBox("Invite sent to friends successfully", "Invite Request Success");
-            break;
-            
             
             
         default:
@@ -278,85 +312,24 @@ void HelloWorld::fbSendRequestCallback(int responseCode, cocos2d::CCArray* frien
 
 void HelloWorld::fbUserPhotoCallback(const char *userPhotoPath)
 {
-    
-    CCSprite* userPhoto = CCSprite::create(userPhotoPath);
-    
-    this->addChild(userPhoto);
-    
-    userPhoto->setPosition(ccp(CCDirector::sharedDirector()->getVisibleSize().width/2,
-                               CCDirector::sharedDirector()->getVisibleSize().height/2));
+        CCSprite* userPhoto = EziSocialObject::sharedObject()->generateCCSprite(userPhotoPath);
+
+        
+        this->addChild(userPhoto);
+        userPhoto->setAnchorPoint(ccp(0, 1));
+        userPhoto->setPosition(ccp(this->getContentSize().width/2, this->getContentSize().height/2));
+
     
 }
 
-
-void HelloWorld::fbRecieveRequestCallback(int responseCode,
-                                          const char* message,
-                                          const char* senderName,
-                                          cocos2d::CCDictionary* dataDictionary)
+void HelloWorld::twitterCallback(int responseCode)
 {
-    CCLOG("fbRecieveRequestCallback");
-    CCLOG("Response Code  = %d", responseCode);
-    CCLOG("Message = %s", message);
-    CCLOG("senderName = %s", senderName);
-    
-    if (dataDictionary && dataDictionary->count() > 0)
+    if (responseCode == EziSocialWrapperNS::RESPONSE_CODE::TWIT_SEND)
     {
-        CCArray* keys = dataDictionary->allKeys();
-        
-        CCLOG("Printing data dictionary");
-        
-        for (int i=0; i<keys->count(); i++)
-        {
-            const char* key = ((CCString*)(keys->objectAtIndex(i)))->getCString();
-            const char* value = ((CCString*)(dataDictionary->valueForKey(key)))->getCString();
-            CCLOG("Key = %s, Value = %s", key, value);
-        }
-        
+        CCMessageBox("Tweet Send", "Twitter");
     }
-    
-    
-    switch (responseCode)
+    else if (responseCode == EziSocialWrapperNS::RESPONSE_CODE::TWIT_CANCEL)
     {
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_INVITE_RECEIVE:
-            CCMessageBox(message, (CCString::createWithFormat("%s Invited You!", senderName, NULL))->getCString());
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_CHALLENGE_RECEIVE:
-            CCMessageBox(message, (CCString::createWithFormat("%s Challenged You!", senderName, NULL))->getCString());
-            break;
-            
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_GIFT_RECEIVE:
-            CCMessageBox(message, (CCString::createWithFormat("%s has send gifts!", senderName, NULL))->getCString());
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_REQUEST_RECEIVE_PARSING_ERROR:
-            CCMessageBox("Request parameters parsing error", "Request Receive - Error");
-            break;
-            
-        case EziSocialWrapperNS::RESPONSE_CODE::FB_REQUEST_RECEIVE_SESSION_ERROR:
-            CCMessageBox("Facebook Session is not active. Ask user to login first via facebook to process incoming request.", "Request Receive - Error");
-            break;
-            
-            
-        default:
-            break;
-    }
-    
-    
-    
-}
-
-
-
-void HelloWorld::fbHighScoresCallback(cocos2d::CCArray* highScores)
-{
-    if (highScores && highScores->count() > 0)
-    {
-        CCLOG("Total High Scores available = %d", highScores->count());
-    }
-    else
-    {
-        CCMessageBox("High Scores are not available.", "Game High Scores.");
+        CCMessageBox("Tweet Cancelled", "Twitter");
     }
 }

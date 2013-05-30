@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "EziSocialDelegate.h"
 
-class HelloWorld : public cocos2d::CCLayer, public EziFacebookDelegate
+class HelloWorld : public cocos2d::CCLayer, public EziFacebookDelegate, public EziEmailDelegate, public EziTwitterDelegate
 {
 public:
     // Method 'init' in cocos2d-x returns bool, instead of 'id' in cocos2d-iphone (an object pointer)
@@ -22,20 +22,23 @@ public:
     virtual void onEnterTransitionDidFinish();
     
     // Facebook Delegate Methods
-    virtual void fbSessionCallback(int responseCode);
-    virtual void fbUserDetailCallback(cocos2d::CCDictionary* data);
-    virtual void fbMessageCallback(int responseCode);
-    virtual void fbPageLikeCallback(int responseCode);
-    virtual void fbFriendsCallback(cocos2d::CCArray* friends);
-    virtual void fbHighScoresCallback(cocos2d::CCArray* highScores);
+    virtual void fbSessionCallback(int responseCode, const char* responseMessage);
+    virtual void fbUserDetailCallback(int responseCode, const char* responseMessage, EziFacebookUser *fbUser);
+    virtual void fbMessageCallback(int responseCode, const char* responseMessage);
+    virtual void fbPageLikeCallback(int responseCode, const char* responseMessage);
     
     virtual void fbUserPhotoCallback(const char *userPhotoPath);
     
-    virtual void fbSendRequestCallback(int responseCode, cocos2d::CCArray* friendsGotRequests);
-    virtual void fbRecieveRequestCallback(int responseCode,
-                                          const char* message,
-                                          const char* senderName,
-                                          cocos2d::CCDictionary* dataDictionary);
+    virtual void fbSendRequestCallback(int responseCode, const char* responseMessage, cocos2d::CCArray* friendsGotRequests);
+    virtual void fbPostPhotoCallback(int responseCode, const char* responseMessage);
+    
+    virtual void fbIncomingRequestCallback(int responseCode, const char* responseMessage, int totalIncomingRequests);
+    
+    // EMail Delegate
+    virtual void mailCallback(int responseCode);
+    
+    // Twitter Callback
+    virtual void twitterCallback(int responseCode);
     
 };
 

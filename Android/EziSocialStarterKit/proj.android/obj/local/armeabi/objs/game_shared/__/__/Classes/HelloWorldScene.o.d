@@ -229,6 +229,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/HelloWorldScene.o: \
  /Users/codesnooker/MacOSX/Development/tools/Cocos2D-X/cocos2d-2.1-x-2.1.2/cocos2dx/CCScheduler.h \
  /Users/codesnooker/MacOSX/Development/tools/Cocos2D-X/cocos2d-2.1-x-2.1.2/cocos2dx/support/data_support/uthash.h \
  jni/../../Classes/EziSocialDelegate.h \
+ jni/../../Classes/EziFacebookUser.h \
  /Users/codesnooker/MacOSX/Development/tools/Cocos2D-X/cocos2d-2.1-x-2.1.2/CocosDenshion/android/../include/SimpleAudioEngine.h \
  /Users/codesnooker/MacOSX/Development/tools/Cocos2D-X/cocos2d-2.1-x-2.1.2/CocosDenshion/android/../include/Export.h \
  jni/../../Classes/EziSocialDefinition.h \
@@ -691,6 +692,8 @@ jni/../../Classes/HelloWorldScene.h:
 /Users/codesnooker/MacOSX/Development/tools/Cocos2D-X/cocos2d-2.1-x-2.1.2/cocos2dx/support/data_support/uthash.h:
 
 jni/../../Classes/EziSocialDelegate.h:
+
+jni/../../Classes/EziFacebookUser.h:
 
 /Users/codesnooker/MacOSX/Development/tools/Cocos2D-X/cocos2d-2.1-x-2.1.2/CocosDenshion/android/../include/SimpleAudioEngine.h:
 
